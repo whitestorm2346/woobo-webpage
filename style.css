@@ -26,6 +26,34 @@ header {
     padding: 2rem 0;
 }
 
+.main-title {
+    font-size: 2rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.question-links {
+    margin: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+}
+
+.link {
+    margin: 0 1rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50rem;
+    border: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.link:hover {
+    cursor: pointer;
+    color: var(--primary-clr);
+    background-color: var(--secondary-clr);
+}
+
 .question-container { 
     margin: 3rem 2rem ;
 }

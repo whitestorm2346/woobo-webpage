@@ -61,3 +61,20 @@ questions.forEach((q, index) => {
 
     quizContainer.appendChild(container);
 });
+
+const initQuestionLinks = () => {
+    const question_links = document.getElementById("question-links");
+
+    let inner_html = ``;
+
+    questions.forEach((q, index) => {
+        inner_html += `<button class="link" id="link-${index + 1}" onclick="showQuestion(${index + 1})">${index + 1}</button>`;
+    });
+
+    question_links.innerHTML = inner_html;
+}
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    initQuestionLinks();
+});
