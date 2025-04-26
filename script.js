@@ -2,19 +2,70 @@
 const questions = [
     {
         question: "台灣的首都是哪裡？",
-        options: ["台北", "高雄", "台中", "新竹"],
+        options: [
+            {
+                text: "台北",
+                state: ""
+            }, 
+            {
+                text: "高雄",
+                state: ""
+            }, 
+            {
+                text: "台中",
+                state: ""
+            }, 
+            {
+                text: "新竹",
+                state: ""
+            }
+        ],
         answer: "台北",
         state: 0
     },
     {
         question: "太陽從哪裡升起？",
-        options: ["東", "西", "南", "北"],
+        options: [
+            {
+                text: "東",
+                state: ""
+            }, 
+            {
+                text: "南",
+                state: ""
+            }, 
+            {
+                text: "西",
+                state: ""
+            }, 
+            {
+                text: "北",
+                state: ""
+            }
+        ],
         answer: "東",
         state: 0
     },
     {
         question: "1 + 1 等於？",
-        options: ["1", "2", "3", "4"],
+        options: [
+            {
+                text: "1",
+                state: ""
+            }, 
+            {
+                text: "2",
+                state: ""
+            }, 
+            {
+                text: "3",
+                state: ""
+            }, 
+            {
+                text: "4",
+                state: ""
+            }
+        ],
         answer: "2",
         state: 0
     }
@@ -35,10 +86,10 @@ const showQuestion = (index) => {
 
     let inner_options = ``;
 
-    questions[index].options.forEach(optionText => {
+    questions[index].options.forEach(option => {
         switch(questions[index].state){
-            case 0: inner_options += `<div class="option">${optionText}</div>`; break;
-            case 1: inner_options += `<div class="option answered">${optionText}</div>`; break;
+            case 0: inner_options += `<div class="option">${option.text}</div>`; break;
+            case 1: inner_options += `<div class="option answered ${option.state}">${option.text}</div>`; break;
         }
     });
 
@@ -57,7 +108,7 @@ const showQuestion = (index) => {
 
     const options = document.getElementById(`q${index + 1}-options`);
 
-    Array.from(options.getElementsByClassName("option")).forEach((option) => {
+    Array.from(options.getElementsByClassName("option")).forEach((option, index2) => {
         option.addEventListener("click", () => {
             if(option.classList.contains("answered")) return;
 
@@ -66,16 +117,18 @@ const showQuestion = (index) => {
             if (option.textContent !== questions[index].answer) {
                 option.classList.add("wrong");
                 link_btn.classList.add("link-wrong");
+                questions[index].options[index2].state = "wrong";
             }
             else {
                 link_btn.classList.add("link-correct");
             }
 
-            Array.from(options.getElementsByClassName("option")).forEach((option2) => {
+            Array.from(options.getElementsByClassName("option")).forEach((option2, index3) => {
                 option2.classList.add("answered");
 
                 if (option2.textContent === questions[index].answer) {
                     option2.classList.add("correct");
+                    questions[index].options[index3].state = "correct";
                 }
             });
 
