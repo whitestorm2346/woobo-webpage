@@ -94,6 +94,10 @@ const showQuestion = (index) => {
     });
 
     let inner_html = `
+        <div class="progress-container" id="progress-container" style="display:none;">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
         <div class="question-title">
           <span>Q${index + 1}.</span>
           ${questions[index].question}
@@ -133,6 +137,36 @@ const showQuestion = (index) => {
             });
 
             questions[index].state = 1;
+
+            // show progress bar
+            const progressContainer = document.getElementById("progress-container");
+            const progressBar = document.getElementById("progress-bar");
+
+            if (progressContainer && progressBar) {
+                progressContainer.style.display = "block";
+
+                let duration = 3; // 5秒
+                let elapsed = 0;
+                const interval = 100; // 0.1秒一次
+                progressBar.style.width = "100%";
+
+                const timer = setInterval(() => {
+                    elapsed += interval / 1000;
+                    let percent = Math.max(0, 100 - (elapsed / duration) * 100);
+                    progressBar.style.width = percent + "%";
+
+                    if (elapsed >= duration) {
+                        clearInterval(timer);
+                        // 若還有下一題，就跳下一題
+                        if (index + 1 < questions.length) {
+                            showQuestion(index + 1);
+                        }
+                        else { // 最後一題作答完畢
+                            progressContainer.style.display = "none"
+                        }
+                    }
+                }, interval);
+            }
         });
     });
 };
