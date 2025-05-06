@@ -81,7 +81,10 @@ const shuffle = (array) => {
 
 shuffle(questions); // 打亂題目順序
 
+let timer = null;
+
 const showQuestion = (index) => {
+    clearInterval(timer);
     const question_container = document.getElementById("question-container");
 
     let inner_options = ``;
@@ -98,7 +101,7 @@ const showQuestion = (index) => {
             <div class="progress-bar" id="progress-bar"></div>
         </div>
 
-        <div class="question-title">
+        <div class="question-title">d
           <span>Q${index + 1}.</span>
           ${questions[index].question}
         </div>
@@ -150,7 +153,7 @@ const showQuestion = (index) => {
                 const interval = 100; // 0.1秒一次
                 progressBar.style.width = "100%";
 
-                const timer = setInterval(() => {
+                timer = setInterval(() => {
                     elapsed += interval / 1000;
                     let percent = Math.max(0, 100 - (elapsed / duration) * 100);
                     progressBar.style.width = percent + "%";
