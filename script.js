@@ -101,7 +101,7 @@ const showQuestion = (index) => {
             <div class="progress-bar" id="progress-bar"></div>
         </div>
 
-        <div class="question-title">d
+        <div class="question-title">
           <span>Q${index + 1}.</span>
           ${questions[index].question}
         </div>
